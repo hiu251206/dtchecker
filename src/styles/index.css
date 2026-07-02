@@ -169,8 +169,8 @@ body {
 }
 
 .brand-title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 26px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
   font-weight: bold;
   color: var(--title-color);
   user-select: none;
