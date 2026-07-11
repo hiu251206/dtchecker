@@ -122,6 +122,37 @@ E2E Test giả lập hành vi người dùng trên trình duyệt thực tế, b
 
 ---
 
+## 🔄 Tích Hợp Kiểm Thử Tự Động CI/CD (GitHub Actions)
+
+Dự án đã cấu hình sẵn quy trình tích hợp liên tục (CI) tự động chạy kiểm thử thông qua **GitHub Actions**.
+
+### 1. Cách hoạt động
+Mỗi khi bạn thực hiện `push` hoặc tạo một `pull_request` lên các nhánh `main`, `master`, hoặc `dev` của kho lưu trữ trên GitHub:
+- GitHub sẽ tự động khởi tạo máy ảo Ubuntu đám mây.
+- Tải về và cài đặt Node.js cùng toàn bộ thư viện dependencies của dự án.
+- Tự động chạy **Unit Tests** (với Vitest) và **E2E Tests** (với Playwright).
+- Đảm bảo code mới không làm hỏng các chức năng hiện có trước khi cho phép merge.
+
+### 2. Các bước thực hiện
+Để kích hoạt luồng CI này cho kho lưu trữ của bạn trên GitHub:
+1. Đảm bảo bạn đã lưu tệp cấu hình tại đường dẫn [.github/workflows/ci.yml](./.github/workflows/ci.yml) ở máy local.
+2. Thực hiện commit và push tệp tin này lên GitHub:
+   ```bash
+   git add .github/workflows/ci.yml
+   git commit -m "chore: configure github actions workflow for testing"
+   git push origin <tên-nhánh-của-bạn>
+   ```
+3. Truy cập vào kho lưu trữ của bạn trên trang web GitHub, chọn tab **Actions** để xem danh sách các lần chạy test (workflow runs) đang được xử lý.
+
+### 3. Tải và xem báo cáo lỗi (Test Artifacts)
+Nếu kịch bản kiểm thử E2E bị lỗi trên môi trường GitHub Actions:
+1. Nhấp vào tên của run bị thất bại trong tab **Actions**.
+2. Cuộn xuống phần **Artifacts** ở dưới cùng của trang.
+3. Tải xuống tệp tin nén **`playwright-report`**.
+4. Giải nén trên máy tính của bạn và mở file `index.html` trong đó bằng trình duyệt để xem các video ghi hình thao tác, screenshot thời điểm lỗi tương tự như khi chạy ở local.
+
+---
+
 ### 💡 Các Lưu Ý Quan Trọng Khi Thực Hiện Kiểm Thử
 
 1. **Tính Độc Lập**: Mỗi ca kiểm thử (cả Unit lẫn E2E) phải hoạt động độc lập và không phụ thuộc vào trạng thái được thiết lập bởi các ca kiểm thử trước đó. Tránh việc chia sẻ dữ liệu hoặc trạng thái toàn cục giữa các test.

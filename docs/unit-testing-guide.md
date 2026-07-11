@@ -163,3 +163,11 @@ Sau khi chạy lệnh xuất báo cáo, thư mục **`coverage/`** sẽ được
    - Các dòng code có **màu xanh lá** kèm chỉ số số lần chạy (ví dụ `12x`) nghĩa là đã được test phủ qua.
    - Các dòng code có **màu đỏ** (ví dụ dòng rẽ nhánh `else` hiển thị MessageBox lỗi) nghĩa là **chưa được test case nào chạm đến** (Uncovered Lines).
 4. Dựa vào các dòng màu đỏ này, hãy viết bổ sung thêm test case (ví dụ viết test case nhập sai dữ liệu để kích hoạt khối code xử lý lỗi) nhằm nâng độ bao phủ lên **`100%`**.
+
+---
+
+## 5. Tích Hợp Kiểm Thử Đơn Vị vào CI/CD (GitHub Actions)
+
+Trong quy trình phát triển chuyên nghiệp, Unit Test được thiết lập chạy tự động trên môi trường CI (Tích hợp liên tục):
+* **Lệnh chạy bắt buộc:** Trên môi trường CI (như cấu hình trong file [ci.yml](../.github/workflows/ci.yml)), chúng ta sử dụng **`npm run test:run`** thay vì `npm run test`. Lệnh này chỉ chạy bộ kiểm thử đúng một lần duy nhất và trả về mã trạng thái thoát (Exit Code `0` nếu tất cả test case đều PASS, `1` nếu có ít nhất một test case bị FAIL) để máy chủ GitHub Actions biết được kết quả test và quyết định cho phép tiếp tục hay chặn luồng CI/CD.
+* **Tầm quan trọng:** Việc tự động hóa chạy Unit Test giúp phát hiện sớm các lỗi phá vỡ logic cũ (Regression Bugs) ngay khi bạn đẩy code mới lên GitHub, giúp bảo vệ tính toàn vẹn của logic kiểm tra ngày tháng.
