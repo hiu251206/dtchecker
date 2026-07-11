@@ -25,7 +25,8 @@ export function daysInMonth(year, month) {
       if (year % 400 === 0) {
         return 29;
       } else if (year % 100 === 0) {
-        return 28;
+        // Bug: return 29 for year 1900 to simulate failure
+        return year === 1900 ? 29 : 28;
       } else if (year % 4 === 0) {
         return 29;
       } else {

@@ -19,30 +19,116 @@ Bài tập môn **SWT301** — FPT University.
 
 ## Cấu trúc thư mục
 
-```
-src/
-├── app/            # App component chính
-├── components/     # Các UI component tái sử dụng
-├── features/       # Logic nghiệp vụ (DateChecker)
-├── hooks/          # Custom React hooks
-├── styles/         # Các file CSS
-├── test/           # Unit tests
-└── main.jsx        # Entry point
+```text
+.
+├── src/                # Mã nguồn chính của ứng dụng
+│   ├── app/            # App component chính
+│   ├── components/     # Các UI component tái sử dụng
+│   ├── features/       # Logic nghiệp vụ (DateChecker.js)
+│   ├── hooks/          # Custom React hooks
+│   └── styles/         # Các file CSS
+└── tests/              # Thư mục chứa các tệp tin kiểm thử
+    ├── e2e/            # Các kịch bản kiểm thử E2E (Playwright)
+    └── unit/           # Các unit test cho logic nghiệp vụ (Vitest)
 ```
 
-## Cài đặt & Chạy
+## Cài đặt & Chạy Thử Nghiệm
+
+### 1. Cài đặt ban đầu
 
 ```bash
-# Cài dependencies
+# Cài đặt các thư viện phụ thuộc
 npm install
 
-# Chạy dev server
-npm run dev
-
-# Chạy unit tests
-npx vitest run
-
-# Chạy E2E tests
-npx playwright test
+# Cài đặt các trình duyệt cần thiết cho Playwright (chỉ cần chạy lần đầu)
+npx playwright install
 ```
+
+### 2. Khởi chạy ứng dụng
+
+```bash
+# Chạy máy chủ phát triển (Vite Dev Server)
+npm run dev
+```
+
+---
+
+## 🧪 Hướng Dẫn Chi Tiết Kiểm Thử (Testing Guide)
+
+> [!NOTE]
+> Bộ tài liệu hướng dẫn kiểm thử chi tiết từ lập kế hoạch (Plan), thực thi (Execution) đến thu thập báo cáo (Report) đã được biên soạn đầy đủ tại thư mục [docs/](./docs):
+> - 🚀 **[Performance Testing Guide](./docs/performance-testing-guide.md)**: Quy trình lập kế hoạch test tải, cấu hình Apache JMeter và xuất báo cáo HTML.
+> - 🧩 **[Unit Testing Guide](./docs/unit-testing-guide.md)**: Hướng dẫn viết test logic, chạy test với Vitest (GUI/Watch mode) và phân tích báo cáo độ bao phủ (Coverage report).
+> - 🎭 **[E2E Testing Guide](./docs/e2e-testing-guide.md)**: Hướng dẫn viết test giao diện, giả lập luồng người dùng bằng Playwright và phân tích báo cáo HTML lỗi kèm video/ảnh chụp.
+
+Dự án này tích hợp đầy đủ hai cấp độ kiểm thử: **Unit Testing** (Kiểm thử đơn vị) và **End-to-End (E2E) Testing** (Kiểm thử giao diện & luồng nghiệp vụ).
+
+### 1. Kiểm Thử Đơn Vị (Unit Testing) với Vitest
+
+Unit Test tập trung kiểm tra tính đúng đắn của logic nghiệp vụ xử lý ngày tháng nằm ở tệp [DateChecker.js](./src/features/DateChecker.js) (bao gồm hàm `daysInMonth` và `isValidDate`).
+
+* **Vị trí file test:** [DateChecker.test.js](./tests/unit/DateChecker.test.js)
+* **Các lệnh thực thi (Định nghĩa tại [package.json](./package.json)):**
+  * **Chạy kiểm thử ở chế độ theo dõi (Watch Mode):**
+    ```bash
+    npm run test
+    ```
+    *Vitest sẽ chạy ngầm và tự động chạy lại các ca kiểm thử mỗi khi phát hiện thay đổi mã nguồn.*
+  * **Chạy kiểm thử một lần duy nhất:**
+    ```bash
+    npm run test:run
+    ```
+  * **Chạy kiểm thử với giao diện Web trực quan (Vitest UI):**
+    ```bash
+    npm run test:ui
+    ```
+    *Khởi chạy máy chủ cục bộ và mở giao diện Web UI hiển thị danh sách các test case, thời gian thực hiện, trạng thái pass/fail trực quan.*
+  * **Chạy kiểm thử và xuất báo cáo HTML:**
+    ```bash
+    npm run test:report
+    ```
+
+
+
+---
+
+### 2. Kiểm Thử Giao Diện & Quy Trình (E2E Testing) với Playwright
+
+E2E Test giả lập hành vi người dùng trên trình duyệt thực tế, bao gồm: điền form, nhấp nút, hiển thị MessageBox, xác nhận đóng ứng dụng...
+
+* **Vị trí file test:** [date-checker.spec.js](./tests/e2e/date-checker.spec.js)
+* **Cấu hình kiểm thử:** [playwright.config.js](./playwright.config.js)
+* **Các lệnh thực thi:**
+  > [!IMPORTANT]
+  > Playwright được thiết lập tự động khởi động máy chủ cục bộ (`npm run dev`) trước khi chạy test, do đó bạn không cần khởi chạy thủ công.
+  
+  * **Chạy toàn bộ E2E Test ở chế độ ẩn danh (Headless):**
+    ```bash
+    npm run test:e2e
+    ```
+    *Chạy song song trên cả 3 trình duyệt Chromium, Firefox, WebKit.*
+  * **Chạy kiểm thử qua giao diện Playwright UI Mode (Rất hữu ích khi debug):**
+    ```bash
+    npm run test:e2e:ui
+    ```
+    *Giao diện UI tương tác cho phép chạy từng ca lẻ, xem timeline các bước click/fill, chụp màn hình và kiểm tra lại trạng thái ở từng bước.*
+  * **Xem báo cáo HTML:**
+    ```bash
+    npm run test:e2e:report
+    ```
+    *Báo cáo kết quả kiểm thử chi tiết kèm theo video ghi hình và ảnh chụp màn hình ghi nhận tại thời điểm xảy ra lỗi.*
+
+
+
+---
+
+### 💡 Các Lưu Ý Quan Trọng Khi Thực Hiện Kiểm Thử
+
+1. **Tính Độc Lập**: Mỗi ca kiểm thử (cả Unit lẫn E2E) phải hoạt động độc lập và không phụ thuộc vào trạng thái được thiết lập bởi các ca kiểm thử trước đó. Tránh việc chia sẻ dữ liệu hoặc trạng thái toàn cục giữa các test.
+2. **Sử Dụng Bộ Chọn (Selectors) Ổn Định**: Khi viết E2E test, hãy ưu tiên tìm phần tử qua ID duy nhất của phần tử đó (ví dụ: `#txtDay`, `#btnCheck`, `#btnClear`) thay vì dựa vào thứ tự thẻ HTML hoặc class CSS động để đảm bảo test không bị hỏng khi thay đổi giao diện.
+3. **Phân Tích Lỗi Khi Test Thất Bại**:
+   - Nếu Unit Test thất bại: Sử dụng `npm run test:ui` để kiểm tra trực quan các giá trị trả về thực tế so với mong muốn.
+   - Nếu E2E Test thất bại: Dùng `npm run test:e2e:report` để xem video và ảnh chụp màn hình ghi nhận tại đúng thời điểm bị lỗi.
+4. **Tích Hợp Kiểm Thử Thường Xuyên**: Nên chạy Unit Test liên tục trong lúc lập trình và chạy toàn bộ suite E2E trước khi đẩy mã nguồn lên Git.
+
 
