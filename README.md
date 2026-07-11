@@ -55,14 +55,20 @@ npm run dev
 
 ## 🧪 Hướng Dẫn Chi Tiết Kiểm Thử (Testing Guide)
 
+> [!NOTE]
+> Bộ tài liệu hướng dẫn kiểm thử chi tiết từ lập kế hoạch (Plan), thực thi (Execution) đến thu thập báo cáo (Report) đã được biên soạn đầy đủ tại thư mục [docs/](./docs):
+> - 🚀 **[Performance Testing Guide](./docs/performance-testing-guide.md)**: Quy trình lập kế hoạch test tải, cấu hình Apache JMeter và xuất báo cáo HTML.
+> - 🧩 **[Unit Testing Guide](./docs/unit-testing-guide.md)**: Hướng dẫn viết test logic, chạy test với Vitest (GUI/Watch mode) và phân tích báo cáo độ bao phủ (Coverage report).
+> - 🎭 **[E2E Testing Guide](./docs/e2e-testing-guide.md)**: Hướng dẫn viết test giao diện, giả lập luồng người dùng bằng Playwright và phân tích báo cáo HTML lỗi kèm video/ảnh chụp.
+
 Dự án này tích hợp đầy đủ hai cấp độ kiểm thử: **Unit Testing** (Kiểm thử đơn vị) và **End-to-End (E2E) Testing** (Kiểm thử giao diện & luồng nghiệp vụ).
 
 ### 1. Kiểm Thử Đơn Vị (Unit Testing) với Vitest
 
-Unit Test tập trung kiểm tra tính đúng đắn của logic nghiệp vụ xử lý ngày tháng nằm ở tệp [DateChecker.js](file:///d:/1.%20FPTU/5.%20SUMMER_2026/2.%20SWT301/datetime-checker-web/src/features/DateChecker.js) (bao gồm hàm `daysInMonth` và `isValidDate`).
+Unit Test tập trung kiểm tra tính đúng đắn của logic nghiệp vụ xử lý ngày tháng nằm ở tệp [DateChecker.js](./src/features/DateChecker.js) (bao gồm hàm `daysInMonth` và `isValidDate`).
 
-* **Vị trí file test:** [DateChecker.test.js](file:///d:/1.%20FPTU/5.%20SUMMER_2026/2.%20SWT301/datetime-checker-web/tests/unit/DateChecker.test.js)
-* **Các lệnh thực thi (Định nghĩa tại [package.json](file:///d:/1.%20FPTU/5.%20SUMMER_2026/2.%20SWT301/datetime-checker-web/package.json)):**
+* **Vị trí file test:** [DateChecker.test.js](./tests/unit/DateChecker.test.js)
+* **Các lệnh thực thi (Định nghĩa tại [package.json](./package.json)):**
   * **Chạy kiểm thử ở chế độ theo dõi (Watch Mode):**
     ```bash
     npm run test
@@ -90,8 +96,8 @@ Unit Test tập trung kiểm tra tính đúng đắn của logic nghiệp vụ x
 
 E2E Test giả lập hành vi người dùng trên trình duyệt thực tế, bao gồm: điền form, nhấp nút, hiển thị MessageBox, xác nhận đóng ứng dụng...
 
-* **Vị trí file test:** [date-checker.spec.js](file:///d:/1.%20FPTU/5.%20SUMMER_2026/2.%20SWT301/datetime-checker-web/tests/e2e/date-checker.spec.js)
-* **Cấu hình kiểm thử:** [playwright.config.js](file:///d:/1.%20FPTU/5.%20SUMMER_2026/2.%20SWT301/datetime-checker-web/playwright.config.js)
+* **Vị trí file test:** [date-checker.spec.js](./tests/e2e/date-checker.spec.js)
+* **Cấu hình kiểm thử:** [playwright.config.js](./playwright.config.js)
 * **Các lệnh thực thi:**
   > [!IMPORTANT]
   > Playwright được thiết lập tự động khởi động máy chủ cục bộ (`npm run dev`) trước khi chạy test, do đó bạn không cần khởi chạy thủ công.
