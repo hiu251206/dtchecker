@@ -3,6 +3,8 @@
 Ứng dụng web kiểm tra tính hợp lệ của ngày/tháng/năm theo lịch Gregorian.  
 Bài tập môn **SWT301** — FPT University.
 
+> ⚡ **[Hướng dẫn nhanh các lệnh chạy kiểm thử (Unit, E2E, Performance Testing)](./QUICK_START_TESTING.md)**
+
 ## Tính năng
 
 - Nhập **Day**, **Month**, **Year** và kiểm tra xem ngày đó có tồn tại hay không.
@@ -57,7 +59,6 @@ npm run dev
 
 > [!NOTE]
 > Bộ tài liệu hướng dẫn kiểm thử chi tiết từ lập kế hoạch (Plan), thực thi (Execution) đến thu thập báo cáo (Report) đã được biên soạn đầy đủ tại thư mục [docs/](./docs):
-> - 🚀 **[Performance Testing Guide](./docs/performance-testing-guide.md)**: Quy trình lập kế hoạch test tải, cấu hình Apache JMeter và xuất báo cáo HTML.
 > - 🧩 **[Unit Testing Guide](./docs/unit-testing-guide.md)**: Hướng dẫn viết test logic, chạy test với Vitest (GUI/Watch mode) và phân tích báo cáo độ bao phủ (Coverage report).
 > - 🎭 **[E2E Testing Guide](./docs/e2e-testing-guide.md)**: Hướng dẫn viết test giao diện, giả lập luồng người dùng bằng Playwright và phân tích báo cáo HTML lỗi kèm video/ảnh chụp.
 
