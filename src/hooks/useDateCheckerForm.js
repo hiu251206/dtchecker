@@ -95,10 +95,12 @@ export function useDateCheckerForm(openMessageBox) {
     setTimeout(() => {
       setIsChecking(false);
       const isValid = isValidDate(day, month, year);
+      const formattedDay = String(day).padStart(2, '0');
+      const formattedMonth = String(month).padStart(2, '0');
       if (isValid) {
-        openMessageBox('Message', `${day}/${month}/${year} is correct date time!`, 'info');
+        openMessageBox('Message', `${formattedDay}/${formattedMonth}/${year} is correct date time`, 'info');
       } else {
-        openMessageBox('Message', `${day}/${month}/${year} is NOT correct date time!`, 'info');
+        openMessageBox('Message', `${formattedDay}/${formattedMonth}/${year} is NOT correct date time`, 'info');
       }
     }, 1000);
   };
