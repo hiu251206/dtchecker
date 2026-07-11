@@ -25,8 +25,7 @@ export function daysInMonth(year, month) {
       if (year % 400 === 0) {
         return 29;
       } else if (year % 100 === 0) {
-        // Bug: return 29 for year 1900 to simulate failure
-        return year === 1900 ? 29 : 28;
+        return 28;
       } else if (year % 4 === 0) {
         return 29;
       } else {
@@ -40,18 +39,20 @@ export function daysInMonth(year, month) {
 
 /**
  * Determines whether the given date exists in the Gregorian calendar.
- * @param {number} year - The year (1000 - 3000)
- * @param {number} month - The month (1 - 12)
  * @param {number} day - The day (1 - 31)
+ * @param {number} month - The month (1 - 12)
+ * @param {number} year - The year (1000 - 3000)
  * @returns {boolean} True if the date is valid, false otherwise.
  */
-export function isValidDate(year, month, day) {
-  if (month >= 1 && month <= 12) {
-    if (day >= 1) {
-      if (day <= daysInMonth(year, month)) {
-        return true;
-      }
-    }
+export function isValidDate(day, month, year) {
+  if (year < 1000 || year > 3000) {
+    return false;
   }
-  return false;
+  if (month < 1 || month > 12) {
+    return false;
+  }
+  if (day < 1 || day > daysInMonth(year, month)) {
+    return false;
+  }
+  return true;
 }
