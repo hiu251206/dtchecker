@@ -94,7 +94,7 @@ export function useDateCheckerForm(openMessageBox) {
     setIsChecking(true);
     setTimeout(() => {
       setIsChecking(false);
-      const isValid = isValidDate(year, month, day);
+      const isValid = isValidDate(day, month, year);
       if (isValid) {
         openMessageBox('Message', `${day}/${month}/${year} is correct date time!`, 'info');
       } else {

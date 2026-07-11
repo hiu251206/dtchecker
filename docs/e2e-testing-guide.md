@@ -155,3 +155,16 @@ npm run test:e2e:report
     - **Screenshot:** Ảnh chụp màn hình trình duyệt tại đúng thời điểm test case bị lỗi rẽ nhánh.
     - **Video:** Đoạn video ngắn ghi lại toàn bộ thao tác tự động của Playwright, giúp bạn xem lại luồng đi và phát hiện lỗi giao diện trực quan.
     - **Trace Viewer:** File trace ghi lại toàn bộ sự kiện mạng, console log và hoạt động của trình duyệt tại mỗi mili-giây chạy test. Nhấp chuột vào liên kết Trace để mở trình phân tích sâu.
+
+---
+
+## 5. Tích Hợp Kiểm Thử E2E vào CI/CD (GitHub Actions)
+
+Trong quy trình phát triển thực tế, kiểm thử E2E là chốt chặn quan trọng nhất của luồng CI:
+* **Tự động khởi động máy chủ:** Trên môi trường CI của GitHub Actions, Playwright sử dụng cấu hình `webServer` trong [playwright.config.js](../playwright.config.js) để tự động chạy lệnh `npm run dev` để khởi chạy ứng dụng web React tại cổng `http://localhost:5173` trước khi thực thi các kịch bản test. Vì thế, chúng ta không cần chạy lệnh dev server thủ công trên CI.
+* **Cài đặt Browser Dependencies:** Trên máy chủ Ubuntu của GitHub Actions, lệnh `npx playwright install --with-deps` là bắt buộc để cài đặt các nhân trình duyệt (Chromium, Firefox, WebKit) và các thư viện hệ điều hành Linux cần thiết.
+* **Truy xuất báo cáo lỗi trên CI:** Nếu một kịch bản test E2E bị thất bại trên GitHub Actions:
+  1. Vào tab **Actions** trên GitHub và nhấp chọn lần chạy (workflow run) bị lỗi.
+  2. Cuộn xuống phần **Artifacts** ở dưới cùng.
+  3. Tải xuống file nén **`playwright-report`**.
+  4. Giải nén và mở file `index.html` để xem video, screenshot thời điểm bị lỗi, giúp bạn gỡ lỗi nhanh chóng mà không cần chạy lại test ở local.

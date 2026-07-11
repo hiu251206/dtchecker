@@ -1,0 +1,42 @@
+name: Web App CI Testing
+
+on:
+  push:
+    branches: [ main, master, dev ]
+  pull_request:
+    branches: [ main, master, dev ]
+
+jobs:
+  test-and-verify:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout mã nguồn
+      uses: actions/checkout@v4
+
+    - name: Cài đặt Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm' # Tự động cache npm dependencies để chạy nhanh hơn ở các lần sau
+
+    - name: Cài đặt thư viện (Dependencies)
+      run: npm ci
+
+    - name: Chạy Kiểm thử đơn vị (Unit Tests) với Vitest
+      run: npm run test:run
+
+    - name: Cài đặt các trình duyệt cho Playwright
+      run: npx playwright install --with-deps
+
+    - name: Chạy Kiểm thử E2E với Playwright
+      run: npm run test:e2e
+
+    - name: Tải báo cáo kiểm thử lên GitHub Artifacts
+      uses: actions/upload-artifact@v4
+      if: always() # Luôn chạy bước này ngay cả khi các bước test trước đó bị thất bại
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 15 # Lưu trữ báo cáo trong 15 ngày
