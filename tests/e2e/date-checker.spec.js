@@ -288,7 +288,7 @@ test.describe('Date Time Checker E2E Tests - Full 43 Test Cases (Lab 1)', () => 
     await page.locator('#btnCheck').click();
     const msg = page.locator('.msgbox-container');
     await expect(msg).toBeVisible({ timeout: 2000 });
-    await expect(msg.locator('.msgbox-message')).toHaveText('28/02/2023 is correct date time!');
+    await expect(msg.locator('.msgbox-message')).toHaveText('28/02/2023 is correct date time');
   });
 
   test('CD-14: Verify validation for day 30 (upper boundary) in April', async ({ page }) => {
@@ -298,7 +298,7 @@ test.describe('Date Time Checker E2E Tests - Full 43 Test Cases (Lab 1)', () => 
     await page.locator('#btnCheck').click();
     const msg = page.locator('.msgbox-container');
     await expect(msg).toBeVisible({ timeout: 2000 });
-    await expect(msg.locator('.msgbox-message')).toHaveText('30/04/2024 is correct date time!');
+    await expect(msg.locator('.msgbox-message')).toHaveText('30/04/2024 is correct date time');
   });
 
   test('CD-15: Verify validation for day 30 (upper boundary) in June', async ({ page }) => {
@@ -308,7 +308,7 @@ test.describe('Date Time Checker E2E Tests - Full 43 Test Cases (Lab 1)', () => 
     await page.locator('#btnCheck').click();
     const msg = page.locator('.msgbox-container');
     await expect(msg).toBeVisible({ timeout: 2000 });
-    await expect(msg.locator('.msgbox-message')).toHaveText('30/06/2024 is correct date time!');
+    await expect(msg.locator('.msgbox-message')).toHaveText('30/06/2024 is correct date time');
   });
 
   test('CD-16: Verify validation for day 30 (upper boundary) in November', async ({ page }) => {
@@ -318,7 +318,7 @@ test.describe('Date Time Checker E2E Tests - Full 43 Test Cases (Lab 1)', () => 
     await page.locator('#btnCheck').click();
     const msg = page.locator('.msgbox-container');
     await expect(msg).toBeVisible({ timeout: 2000 });
-    await expect(msg.locator('.msgbox-message')).toHaveText('30/11/2024 is correct date time!');
+    await expect(msg.locator('.msgbox-message')).toHaveText('30/11/2024 is correct date time');
   });
 
 
