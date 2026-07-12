@@ -92,4 +92,19 @@ npm run test:e2e:ui
 npm run test:e2e:report
 ```
 
+### 4. Visual Regression Testing (Playwright)
+Verify that the UI layout and look-and-feel remain intact and match the baseline screenshots:
+```bash
+# 1. Run visual regression tests (compares screenshots against baselines)
+npx playwright test tests/e2e/visual-checker.spec.js
+
+# 2. Update visual baseline screenshots (use this if you intentionally changed the UI design)
+npx playwright test tests/e2e/visual-checker.spec.js --update-snapshots
+
+# 3. View comparison UI if a visual test fails (uses visual diff side-by-side or slider)
+npm run test:e2e:report
+```
+*Note: Snapshot baseline images are stored under `tests/e2e/visual-checker.spec.js-snapshots/`.*
+
+
 
