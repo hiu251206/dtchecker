@@ -1,0 +1,24 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: visual-checker.spec.js >> Date Time Checker - Visual Regression Tests >> V-04: Verify close confirmation message box visual
+- Location: tests/e2e/visual-checker.spec.js:32:3
+
+# Error details
+
+```
+Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1532/firefox/firefox
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+```
