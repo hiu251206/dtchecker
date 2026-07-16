@@ -160,7 +160,7 @@ body {
 
 /*TEST VISUAL REGRESSION CHỖ NÀY*/
 .brand-logo-container {
-  width: 180px;
+  width: 140px;
   height: auto;
   display: flex;
   align-items: center;
