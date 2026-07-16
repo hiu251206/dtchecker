@@ -106,5 +106,19 @@ npm run test:e2e:report
 ```
 *Note: Snapshot baseline images are stored under `tests/e2e/visual-checker.spec.js-snapshots/`.*
 
+### 5. AI-Assisted Testing (Gemini API)
+Run interactive AI-assisted test generation and execution directly from your terminal:
+```bash
+# Run the interactive AI tester
+npm run test:ai
+```
+Follow the terminal prompts:
+1. **Choose test type**: Playwright E2E Test (Option 1) or Vitest Unit Test (Option 2).
+2. **Enter the scenario**: Tell the AI what you want to verify (e.g., `"Kiểm tra ngày 29/02/2024 hợp lệ và 29/02/2023 không hợp lệ"`).
+3. **Execution & Self-Healing**: The script requests Gemini API to generate the code, writes it to a file, and executes it. If the test fails, the script will ask if you want the AI to analyze the error log and fix/heal the test code automatically!
 
-
+> [!NOTE]
+> This requires a **Gemini API Key** from [Google AI Studio](https://aistudio.google.com/). You can input the key when prompted, or save it beforehand in a `.env` file at the root:
+> ```env
+> GEMINI_API_KEY=your_actual_api_key_here
+> ```
