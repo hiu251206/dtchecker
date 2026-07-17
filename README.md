@@ -28,6 +28,7 @@ Course project for **SWT301** — FPT University.
 │   ├── hooks/          # Custom React hooks
 │   └── styles/         # CSS styles
 └── tests/              # Test files
+    ├── ai/             # AI-assisted testing scripts (ai-tester.js)
     ├── e2e/            # Playwright E2E tests
     └── unit/           # Vitest unit tests
 ```
