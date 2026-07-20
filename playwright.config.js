@@ -40,8 +40,15 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for major browsers and API */
   projects: [
+    {
+      name: 'api',
+      testDir: './tests/api',
+      use: {
+        baseURL: 'http://localhost:3001',
+      },
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -59,10 +66,17 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'npm run dev',
+      url: 'http://localhost:5173',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'node server.js',
+      url: 'http://localhost:3001',
+      reuseExistingServer: !process.env.CI,
+    }
+  ],
 });
 
